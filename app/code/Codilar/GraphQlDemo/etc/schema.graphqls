@@ -1,0 +1,11 @@
+#Codilar Blog GraphQl Schema
+type Query {
+    codilarblog: Codilarblog @resolver(class: "Codilar\\GraphQlDemo\\Model\\Resolver\\Blog") @doc(description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+}
+
+type Codilarblog @doc(description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.") {
+    entity_id: Int
+    blog_name: String
+    author: String
+    blog_content: String
+}
