@@ -74,8 +74,8 @@ class DomTest extends \PHPUnit\Framework\TestCase
     {
         $path = realpath(__DIR__ . '/../../_files/view');
         $paths = [
-            $path . '/module_one/ui_component/' . $filename,
-            $path . '/module_two/ui_component/' . $filename
+            $path . '/module_one/templates/' . $filename,
+            $path . '/module_two/templates/' . $filename
         ];
         return new FileIterator(new ReadFactory(new DriverPool), $paths);
     }

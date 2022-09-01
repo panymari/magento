@@ -18,23 +18,23 @@ class FileResolverStub implements \Magento\Framework\Config\FileResolverInterfac
      */
     private $files = [
         'etc/definition.xml' => [
-            'module_one/ui_component/etc/test_definition.xml',
-            'module_two/ui_component/etc/test_definition.xml'
+            'module_one/templates/etc/test_definition.xml',
+            'module_two/templates/etc/test_definition.xml'
         ],
         'etc/definition.map.xml' => [
-            'ui_component/etc/definition.map.xml'
+            'templates/etc/definition.map.xml'
         ],
         'etc/test_definition.xml' => [
-            'module_one/ui_component/etc/test_definition.xml',
-            'module_two/ui_component/etc/test_definition.xml'
+            'module_one/templates/etc/test_definition.xml',
+            'module_two/templates/etc/test_definition.xml'
         ],
         'test_component.xml' => [
-            'module_one/ui_component/test_component.xml',
-            'module_two/ui_component/test_component.xml'
+            'module_one/templates/test_component.xml',
+            'module_two/templates/test_component.xml'
         ],
         'parent_component.xml' => [
-            'module_one/ui_component/parent_component.xml',
-            'module_two/ui_component/parent_component.xml'
+            'module_one/templates/parent_component.xml',
+            'module_two/templates/parent_component.xml'
         ]
     ];
 

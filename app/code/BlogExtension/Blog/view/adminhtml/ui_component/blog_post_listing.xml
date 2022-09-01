@@ -1,166 +1,178 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
-            <item name="deps" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
         </item>
-        <item name="spinner" xsi:type="string">blog_post_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
-                <item name="label" xsi:type="string">View Category Tree</item>
+                <item name="label" xsi:type="string" translate="true">Add New Post</item>
+                <item name="url" xsi:type="string">blog/post/new</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">blog/post/index</item>
             </item>
         </item>
     </argument>
-    <dataSource name="blog_post_listing_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">MageDigest\Grid\Ui\DataProvider\Post\ListingDataProvider</argument>
-            <argument name="name" xsi:type="string">blog_post_listing_data_source</argument>
-            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
-            <argument name="requestFieldName" xsi:type="string">entity_id</argument>
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">entity_id</item>
-                    </item>
-                </item>
-            </argument>
-        </argument>
-        <argument name="data" xsi:type="array">
-            <item name="js_config" xsi:type="array">
-                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
-            </item>
-        </argument>
+    <settings>
+        <deps>
+            <dep>blog_post_listing.blog_post_listing_data_source</dep>
+        </deps>
+        <spinner>blog_post_columns</spinner>
+    </settings>
+    <dataSource name="blog_post_listing_data_source" component="Magento_Ui\js\grid\provider">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+        </settings>
+        <aclResource>BlogExtension_Blog::post</aclResource>
+        <dataProvider name="blog_post_listing_data_source" class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
     </dataSource>
     <listingToolbar name="listing_top">
-        <bookmark name="bookmarks"/>
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <paging name="listing_paging"/>
         <columnsControls name="columns_controls"/>
-        <massaction name="listing_massaction">
-            <argument name="data" xsi:type="array">
-                <item name="data" xsi:type="array">
-                    <item name="selectProvider" xsi:type="string">blog_post_listing.blog_post_listing.blog_post_columns.ids</item>
-                    <item name="displayArea" xsi:type="string">bottom</item>
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                </item>
-            </argument>
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction" component="Magento_Ui/js/grid/tree-massactions">
+            <settings>
+                <selectProvider>blog_post_listing.blog_post_listing.blog_post_columns.ids</selectProvider>
+            </settings>
             <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="blog/post/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete items</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="blog/post/massDelete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete items</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="delete">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">delete</item>
-                        <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="blog/post/delete"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Delete items</item>
-                            <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
-                        </item>
-                    </item>
-                </argument>
-            </action>
-            <action name="edit">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="type" xsi:type="string">edit</item>
-                        <item name="label" xsi:type="string" translate="true">Edit</item>
-                        <item name="url" xsi:type="url" path="blog/post/edit"/>
-                        <item name="confirm" xsi:type="array">
-                            <item name="title" xsi:type="string" translate="true">Edit items</item>
-                        </item>
-                    </item>
-                </argument>
+                <settings>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                    <url path="*/*/massDelete"/>
+                    <confirm>
+                        <title translate="true">Delete items</title>
+                        <message translate="true">Are you sure you want to delete the selected items?</message>
+                    </confirm>
+                </settings>
             </action>
         </massaction>
-        <filters name="listing_filters">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="templates" xsi:type="array">
-                        <item name="filters" xsi:type="array">
-                            <item name="select" xsi:type="array">
-                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
-                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
-                            </item>
-                        </item>
-                    </item>
-                </item>
-            </argument>
-        </filters>
-        <paging name="listing_paging"/>
     </listingToolbar>
     <columns name="blog_post_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing.blog_post_columns_editor</item>
+                    <item name="target" xsi:type="string">startEdit</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+                        <item name="1" xsi:type="boolean">true</item>
+                    </item>
+                </param>
+            </childDefaults>
+            <editorConfig>
+                <param name="clientConfig" xsi:type="array">
+                    <item name="saveUrl" xsi:type="url" path="*/*/inlineEdit"/>
+                    <item name="validateBeforeSave" xsi:type="boolean">false</item>
+                </param>
+                <param name="selectProvider" xsi:type="string">blog_post_listing.blog_post_listing.blog_post_columns.ids</param>
+                <param name="indexField" xsi:type="string">id</param>
+                <param name="enabled" xsi:type="boolean">true</param>
+            </editorConfig>
+        </settings>
         <selectionsColumn name="ids">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                </item>
-            </argument>
+            <settings>
+                <indexField>id</indexField>
+            </settings>
         </selectionsColumn>
-        <column name="entity_id">
+        <column name="id">
             <settings>
-                <filter>textRange</filter>
                 <label translate="true">ID</label>
-                <resizeDefaultWidth>25</resizeDefaultWidth>
+                <filter>textRange</filter>
             </settings>
         </column>
-        <column name="path">
+        <column name="url_key">
             <settings>
-                <filter>text</filter>
-                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
-                <label translate="true">Path</label>
+                <label translate="true">Url key</label>
+                <filter>textRange</filter>
             </settings>
         </column>
-        <column name="name">
+        <column name="title">
             <settings>
-                <filter>text</filter>
-                <bodyTmpl>ui/grid/cells/text</bodyTmpl>
-                <label translate="true">Name</label>
+                <label translate="true">Title</label>
+                <filter>textRange</filter>
             </settings>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+        <column name="store_id" component="Magento_Ui/js/grid/columns/select">
             <settings>
+                <label translate="true">Store</label>
+                <options class="BlogExtension\Blog\Model\Config\Source\Store" />
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <label translate="true">Status</label>
+                <options class="BlogExtension\Blog\Model\Source\Status"/>
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="category_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <label translate="true">Category</label>
+                <options class="BlogExtension\Blog\Model\Config\Source\Category" />
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+        <column name="tag_id" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <label translate="true">Tag</label>
+                <options class="BlogExtension\Blog\Model\Config\Source\Tag" />
+                <dataType>select</dataType>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                </editor>
+            </settings>
+        </column>
+
+        <column name="created_at" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Created at</label>
                 <filter>dateRange</filter>
-                <dataType>date</dataType>
-                <label translate="true">Created</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="MageDigest\Grid\Ui\Component\Category\Listing\Column\Actions" sortOrder="200">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="resizeEnabled" xsi:type="boolean">false</item>
-                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                    <item name="indexField" xsi:type="string">entity_id</item>
-                </item>
-            </argument>
-            <argument name="viewUrl" xsi:type="string">blog/post/view</argument>
-        </actionsColumn>
+        <column name="updated_at" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Updated at</label>
+                <filter>dateRange</filter>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="BlogExtension\Blog\Ui\Component\Listing\Column\Actions"/>
     </columns>
 </listing>

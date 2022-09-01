@@ -8,68 +8,66 @@
         <column xsi:type="varchar" name="title" nullable="false" length="50" comment="Title" />
         <column xsi:type="varchar" name="content" nullable="false" length="255" comment="Content" />
         <column xsi:type="varchar" name="status" nullable="false" length="50" comment="Status" />
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" identity="false" default="0" comment="Store ID"/>
+        <column xsi:type="int" name="category_id" unsigned="true" nullable="false" identity="false" default="0" comment="Category ID"/>
+        <column xsi:type="int" name="tag_id" unsigned="true" nullable="false" identity="false" default="0" comment="Tag ID"/>
+
 
         <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
         <column name="updated_at" nullable="true" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="true"/>
+
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
         </constraint>
-    </table>
 
+        <constraint
+            xsi:type="foreign"
+            referenceId="FK_POSTS_STORE_ID"
+            table="posts"
+            column="store_id"
+            referenceTable="store"
+            referenceColumn="store_id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="FK_POSTS_CATEGORY_ID"
+            table="posts"
+            column="category_id"
+            referenceTable="categories"
+            referenceColumn="id"
+            onDelete="CASCADE"
+        />
+        <constraint
+            xsi:type="foreign"
+            referenceId="FK_POSTS_TAG_ID"
+            table="posts"
+            column="tag_id"
+            referenceTable="tags"
+            referenceColumn="id"
+            onDelete="CASCADE"
+        />
+    </table>
     <table name="categories" resource="default" engine="innodb" comment="Categories table">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID" />
 
         <column xsi:type="varchar" name="title" nullable="false" length="50" comment="Title" />
+        <column xsi:type="varchar" name="url_key" nullable="false" comment="Url key" />
 
         <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
-        <column name="updated_at" nullable="true" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
         </constraint>
     </table>
-
-    <table name="categories_has_posts" resource="default" engine="innodb" comment="Categories and posts table">
-        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID" />
-        <column xsi:type="int" name="category_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Category ID" />
-        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Post ID" />
-
-        <constraint xsi:type="foreign" referenceId="FK_POSTS_CATEGORIES_HAS_POSTS"
-                    table="categories_has_posts" column="post_id" referenceTable="posts"
-                    referenceColumn="id" onDelete="CASCADE"/>
-        <constraint xsi:type="foreign" referenceId="FK_CATEGORIES_CATEGORIES_HAS_POSTS"
-                    table="categories_has_posts" column="category_id" referenceTable="categories"
-                    referenceColumn="id" onDelete="CASCADE"/>
-        <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="id" />
-        </constraint>
-    </table>
-
-    <table name="tags" resource="default" engine="innodb" comment="Tags table">
+    <table name="tags" resource="default" engine="innodb" comment="Categories table">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID" />
 
         <column xsi:type="varchar" name="title" nullable="false" length="50" comment="Title" />
+        <column xsi:type="varchar" name="url_key" nullable="false" comment="Url key" />
 
         <column name="created_at" nullable="false" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="false"/>
-        <column name="updated_at" nullable="true" xsi:type="datetime" default="CURRENT_TIMESTAMP" on_update="true"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id" />
         </constraint>
     </table>
-
-    <table name="tags_has_posts" resource="default" engine="innodb" comment="Tags and posts table">
-        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="ID" />
-        <column xsi:type="int" name="tag_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Tag ID" />
-        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Post ID" />
-
-        <constraint xsi:type="foreign" referenceId="FK_POSTS_TAGS_HAS_POSTS"
-                    table="tags_has_posts" column="post_id" referenceTable="posts"
-                    referenceColumn="id" onDelete="CASCADE"/>
-        <constraint xsi:type="foreign" referenceId="FK_TAGS_TAGS_HAS_POSTS"
-                    table="tags_has_posts" column="tag_id" referenceTable="tags"
-                    referenceColumn="id" onDelete="CASCADE"/>
-        <constraint xsi:type="primary" referenceId="PRIMARY">
-            <column name="id" />
-        </constraint>
-    </table>
-
 </schema>

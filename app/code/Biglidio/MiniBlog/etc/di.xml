@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Biglidio\MiniBlog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">biglidio_miniblog_post</argument>
+            <argument name="resourceModel" xsi:type="string">Biglidio\MiniBlog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="biglidio_miniblog_post_listing_data_source" xsi:type="string">Biglidio\MiniBlog\Model\ResourceModel\Post\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Biglidio\MiniBlog\CoverImageUpload" type="Biglidio\MiniBlog\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">miniblog/tmp/post/cover</argument>
+            <argument name="basePath" xsi:type="string">miniblog/post/cover</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument> 
+        </arguments>
+    </virtualType>
+    <type name="Biglidio\MiniBlog\Controller\Adminhtml\Post\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Biglidio\MiniBlog\CoverImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Biglidio\MiniBlog\Controller\Adminhtml\Post\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Biglidio\MiniBlog\CoverImageUpload</argument>
+        </arguments>
+    </type>
+</config>

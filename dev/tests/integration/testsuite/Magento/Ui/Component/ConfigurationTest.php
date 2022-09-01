@@ -87,7 +87,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     {
         $uiConfigurationFiles = $this->dirSearch->collectFilesWithContext(
             ComponentRegistrar::MODULE,
-            'view/*/ui_component/*.xml'
+            'view/*/templates/*.xml'
         );
         $this->generateXpaths();
 

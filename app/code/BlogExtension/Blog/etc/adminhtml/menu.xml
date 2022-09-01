@@ -1,9 +1,37 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="BlogExtension_Blog::blog" title="Blog" module="BlogExtension_Blog" sortOrder="1" resource="BlogExtension_Blog::blog"/>
-        <add id="BlogExtension_Blog::post" title="Posts" module="BlogExtension_Blog" sortOrder="1" action="blog/post/index" resource="BlogExtension_Blog::post" parent="BlogExtension_Blog::blog"/>
-        <add id="BlogExtension_Blog::category" title="Categories" module="BlogExtension_Blog" sortOrder="2" action="blog/category/index" resource="BlogExtension_Blog::category" parent="BlogExtension_Blog::blog"/>
-        <add id="BlogExtension_Blog::tag" title="Tags" module="BlogExtension_Blog" sortOrder="3" action="blog/tag/index" resource="BlogExtension_Blog::tag" parent="BlogExtension_Blog::blog"/>
+        <add
+            id="BlogExtension_Blog::blog"
+            title="Blog"
+            module="BlogExtension_Blog"
+            sortOrder="1"
+            resource="BlogExtension_Blog::blog"/>
+        <add
+            id="BlogExtension_Blog::post"
+            title="Posts"
+            module="BlogExtension_Blog"
+            sortOrder="1"
+            action="blog/post/index"
+            resource="BlogExtension_Blog::post"
+            parent="BlogExtension_Blog::blog"/>
+        <add
+            id="BlogExtension_Blog::category"
+            title="Categories"
+            module="BlogExtension_Blog"
+            sortOrder="2"
+            action="blog/category/index"
+            resource="BlogExtension_Blog::category"
+            parent="BlogExtension_Blog::blog"
+        />
+        <add
+            id="BlogExtension_Blog::tag"
+            title="Tags"
+            module="BlogExtension_Blog"
+            sortOrder="3"
+            action="blog/tag/index"
+            resource="BlogExtension_Blog::tag"
+            parent="BlogExtension_Blog::blog"
+        />
     </menu>
 </config>

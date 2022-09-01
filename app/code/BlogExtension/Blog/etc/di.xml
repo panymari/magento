@@ -1,16 +1,44 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="BlogExtension\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">posts</argument>
+            <argument name="resourceModel" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-        <arguments>.
+        <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="md_grid_category_listing_data_source" xsi:type="string">MdGridCategoryCollection</item>
+                <item name="blog_post_listing_data_source" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Post\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="MdGridCategoryCollection" type="MageDigest\Grid\Ui\DataProvider\Category\Listing\Collection">
+
+    <virtualType name="BlogExtension\Blog\Model\ResourceModel\Category\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
-            <argument name="mainTable" xsi:type="string">catalog_category_entity</argument>
-            <argument name="resourceModel" xsi:type="string">MageDigest\Grid\Model\ResourceModel\Category</argument>
+            <argument name="mainTable" xsi:type="string">categories</argument>
+            <argument name="resourceModel" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Category</argument>
         </arguments>
     </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_category_listing_data_source" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="BlogExtension\Blog\Model\ResourceModel\Tag\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tags</argument>
+            <argument name="resourceModel" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Tag</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_tag_listing_data_source" xsi:type="string">BlogExtension\Blog\Model\ResourceModel\Tag\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

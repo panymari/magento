@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 namespace BlogExtension\Blog\Controller\Adminhtml\Category;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
@@ -13,7 +16,7 @@ class Index implements HttpGetActionInterface
     /**
      * @var PageFactory
      */
-    private $pageFactory;
+    protected $pageFactory = false;
 
     /**
      * @param PageFactory $pageFactory
@@ -29,8 +32,8 @@ class Index implements HttpGetActionInterface
     public function execute()
     {
         $resultPage= $this->pageFactory->create();
-        $resultPage->setActiveMenu('Magento_Catalog::catalog_products');
-        $resultPage->getConfig()->getTitle()->prepend(__('Categories List'));
+        $resultPage->setActiveMenu('BlogExtension_Blog::post');
+        $resultPage->getConfig()->getTitle()->prepend(__('Posts List'));
 
         return $resultPage;
     }
