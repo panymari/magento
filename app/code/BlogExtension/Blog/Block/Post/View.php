@@ -47,7 +47,7 @@ class View extends Template
         $filteredPosts = [];
 
         foreach ($posts as $post) {
-            if ($post['status'] == 1) {
+            if ($post['status'] == 2) {
                 $filteredPosts[] = $post;
             }
         }

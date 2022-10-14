@@ -5,7 +5,6 @@ define(['uiComponent'], function (uiComponent) {
         },
         initialize: function () {
             this._super();
-            console.log(this.posts);
             return this;
         },
         getDate: function (value) {
